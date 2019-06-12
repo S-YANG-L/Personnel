@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<!-- meta charset="UTF-8" > -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iscroll.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iuapmobile.um.listview.css">
+		<link rel="stylesheet" type="text/css" href="../css/mint.css">
+		<link rel="stylesheet" type="text/css" href="../css/screen.css">
+
+		<style>
+			div.Artical > div {
+				display: none;
+			}
+			div.Artical > div.active {
+				display: block;
+			}
+			div.Artical2 > div {
+				display: none;
+			}
+			div.Artical2 > div.active {
+				display: block;
+			}
+
+
+		</style>
+
+		<script src="../js/reset.js"></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/slider.js"></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../js/engineering_management.js" ></script>
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<script type="text/javascript" src="../js/mint.js"></script>
+		<script src="../js/iscroll.js"></script>
+	</head>
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header" >
+				<h3>工程管理</h3>
+				<a onclick="fanhui()" class="um-back"></a>
+				<!-- <a class="um-screen" >筛选</a> -->
+			</div>
+
+			<div class="um-screenbox">
+
+				<!-- 时间筛选 -->
+				<div class="screen-time">
+					<span class="screen-bt">时间筛选</span>
+					<div class="lease-input">
+						<span>开始时间</span>
+						<div class="fr">
+							<input  id="start" type="text" class="inputnone scroller-date">
+						</div>
+					</div>
+					<div class="lease-input">
+						<span>结束时间</span>
+						<div class="fr">
+							<input  id="end" type="text" class="inputnone scroller-date">
+						</div>
+					</div>
+				</div>
+
+				<!-- 价格筛选 -->
+				<div class="screen-price">
+					<span class="screen-bt">价格筛选</span>
+					<div class="screen-input">
+						<span class="screen-inputleft">
+							<input type="number" class="screeninput">
+						</span>
+						至
+						<span class="screen-inputright">
+							<input type="number" class="screeninput">
+						</span>
+					</div>
+				</div>
+
+				<!-- 条件筛选 -->
+				<div class="screen-if">
+					<span class="screen-bt">条件筛选</span>
+					<div class="condition">
+						<span class="conditionif">近地铁</span>
+						<span class="conditionif">集中供暖</span>
+						<span class="conditionif">押一付一</span>
+						<span class="conditionif">精装修</span>
+						<span class="conditionif">双卫</span>
+						<span class="conditionif">朝南</span>
+					</div>
+				</div>
+
+				<div style="text-align: center;margin-top: 0.5rem;">
+					<button class="bluebutton2" type="submit">
+						确定
+					</button>
+				</div>
+
+			</div>
+			<div class="um-dark"></div>
+
+			<div class="um-content" style="margin-top:0;">
+				<ul class="um-tabbar um-tabbar-underline2 pt10 pb10 um-tabbar-switch" style="background: #fff;">
+					<li class="active" data-tar='.check'>
+						<a onclick="inspection()">巡检计划</a><span></span>
+					</li>
+					<!-- <li class="active" data-tar='.check'><a onclick="goMyInspection()">我的巡检</a><span></span></li> -->
+					<li data-tar='.product'>
+						<a onclick="pollingEnd()">已完成</a><span></span>
+					</li>
+				</ul>
+
+				<!-- <div class="Artical" >  巡检
+				<div class="check active ">
+				<div class="um-listview-wrap" id="listview" >
+				巡检计划
+				<ul class="um-list um-no-active" id = "pollingAll" >
+
+				</ul>
+				</div>
+				</div> -->
+				<div class="Artical">
+
+					<!-- 我的巡检	 -->
+					<div class="to-do active " id="searchLike">
+						<div style="background:#fff;padding:0.3rem;overflow:hidden;">
+							<input type="search" class="lease-search" placeholder="请输入主题" id="commission" >
+							<button class="lease-searchbtn" onclick="obscure()">
+								搜索
+							</button>
+						</div>
+						<!-- <div class="mail-search">
+							<span class="searchicon"> <img src="../img/search-icon.png"> </span>
+							<input id="sear" type="search" class="search-input" placeholder="巡检查询" onchange="searchClick()">
+						</div> -->
+						<ul class="um-list" id="pollingAll">
+
+						</ul>
+					</div>
+
+				</div>
+
+				<!-- <div  class="product" style="position:relative;">
+
+				<ul id="meterReadingID" class="um-tabbar-underline3 um-tabbar-switch" style="background: #f3f4f4;">
+
+				</ul>
+				<div class="Artical2">
+				<div class="community-01 community-box active">
+				<div class="record-head">
+				<span class="record-headimg"><img src="../img/mailhead.png"> </span>
+				<span class="record-persion" id="readingDetails"></span>
+				</div>
+				<div class="record-select">
+				<span class="record-title">小区名称</span>
+				<select id="villageList" class="record_drop_down" onchange="buildingChange()">
+				<option selected = "selected">请选择</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">楼栋</span>
+				<select id="buildingList" class="record_drop_down" onchange="roomHouseChange()">
+				<option selected = "selected">请选择</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">单元</span>
+				<select class="record_drop_down">
+				<option value="一单元">一单元</option>
+				<option value="二单元">二单元</option>
+				<option value="三单元">三单元</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">门牌号</span>
+				<select id="roomList" class="record_drop_down">
+				<option selected = "selected">请选择</option>
+				</select>
+				</div>
+				<div class="record-bluebtn">
+				<button class="bluebuttonsmall" onclick="goMeterReading()">确定</button>
+				</div>
+				</div>
+
+				<div class="community-02 community-box">
+				<div class="record-head">
+				<span class="record-headimg"><img src="../img/mailhead.png"> </span>
+				<span class="record-persion">抄表人:李皇甫 </span>
+				</div>
+				<div class="record-select">
+				<span class="record-title">小区名称</span>
+				<select class="record_drop_down">
+				<option value="北店嘉园南">北店嘉园南</option>
+				<option value="北京乐天国际">北京乐天国际</option>
+				<option value="北京圣世一品">北京圣世一品</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">楼栋</span>
+				<select class="record_drop_down">
+				<option value="2号楼">2号楼</option>
+				<option value="1号楼">1号楼</option>
+				<option value="3号楼">3号楼</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">单元</span>
+				<select class="record_drop_down">
+				<option value="二单元">二单元</option>
+				<option value="一单元">一单元</option>
+				<option value="三单元">三单元</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">门牌号</span>
+				<select class="record_drop_down">
+				<option value="101">101</option>
+				<option value="102">102</option>
+				<option value="103">103</option>
+				</select>
+				</div>
+				<div class="record-bluebtn">
+				<button class="bluebuttonsmall" onclick="goMeterReading()">确定</button>
+				</div>
+				</div>
+
+				<div class="community-03 community-box">
+				<div class="record-head">
+				<span class="record-headimg"><img src="../img/mailhead.png"> </span>
+				<span class="record-persion">抄表人:李皇甫 </span>
+				</div>
+				<div class="record-select">
+				<span class="record-title">小区名称</span>
+				<select class="record_drop_down">
+				<option value="北店嘉园南">北店嘉园南</option>
+				<option value="北京乐天国际">北京乐天国际</option>
+				<option value="北京圣世一品">北京圣世一品</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">楼栋</span>
+				<select class="record_drop_down">
+				<option value="1号楼">1号楼</option>
+				<option value="2号楼">2号楼</option>
+				<option value="3号楼">3号楼</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">单元</span>
+				<select class="record_drop_down">
+				<option value="一单元">一单元</option>
+				<option value="二单元">二单元</option>
+				<option value="三单元">三单元</option>
+				</select>
+				</div>
+				<div class="record-select">
+				<span class="record-title">门牌号</span>
+				<select class="record_drop_down">
+				<option value="101">101</option>
+				<option value="102">102</option>
+				<option value="103">103</option>
+				</select>
+				</div>
+				<div class="record-bluebtn">
+				<button class="bluebuttonsmall" onclick="goMeterReading()">确定</button>
+				</div>
+
+				</div>
+
+				</div>
+
+				</div> -->
+
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			$(function() {
+				$('.scroller-date').scroller('destroy').scroller({
+					preset : 'datetime',
+					theme : "ios7",
+					mode : "scroller",
+					display : "bottom",
+					animate : ""
+				});
+
+				$(".conditionif").click(function() {
+					$(this).toggleClass('conditionifactive');
+				});
+				$('.um-screen').click(function() {
+					$('.um-dark').fadeIn(100);
+					$('.um-screenbox').slideDown(200);
+
+				})
+				$('.um-dark').click(function() {
+					$('.um-dark').fadeOut(100);
+					$('.um-screenbox').slideUp(200);
+				})
+			});
+
+		</script>
+
+		<script>
+			$(function() {
+				/*导航更换js*/
+				$('ul.um-tabbar-switch  Li').click(function() {
+					$(this).addClass('active').siblings('.active').removeClass('active');
+					var tar = $(this).attr('data-tar');
+					$(tar).addClass('active').siblings('.active').removeClass('active');
+				});
+
+				$('ul.um-tabbar-switch  Li').click(function() {
+					$(this).addClass('active').siblings('.active').removeClass('active');
+					var tar = $(this).attr('data-tar');
+					$(tar).addClass('active').siblings('.active').removeClass('active');
+				});
+
+			});
+
+		</script>
+
+		<script>
+			var jsonArray = [{
+				"type" : "11巡检",
+				"img" : "../img/inspect-icon.png",
+				"lastMsg" : "对小区内电力设备进行巡检",
+				"lastTime" : "3月12日",
+				"workTime" : "2019-01-02至2019-01-08"
+			}, {
+				"type" : "12巡检",
+				"img" : "../img/inspect-icon.png",
+				"lastMsg" : "对小区内装修案例进行巡检",
+				"lastTime" : "3月13日",
+				"workTime" : "2019-01-02至2019-01-08"
+			}, {
+				"type" : "13巡检",
+				"img" : "../img/inspect-icon.png",
+				"lastMsg" : "对小区内防火设备进行巡检",
+				"lastTime" : "3月14日",
+				"workTime" : "2019-01-02至2019-01-08"
+			}];
+			// 构造控件Vue实例
+			var listview = new Vue({
+				el : '#listview',
+				data : {
+					listDatas : [],
+					timeOutEvent : 0
+				},
+				mounted : function() {
+					// 组件挂载后执行...
+					this.listDatas = jsonArray;
+				},
+				methods : {
+					/* 在这里定义方法 */
+					itemClick : function(index) {
+						// 这里编辑单击列表项逻辑
+						//alert("您点击了列表第" + (index + 1) + "行！");
+					},
+					tapHold : function(index) {
+						// 这里编辑长按列表项逻辑
+						var ev = event || window.event;
+						var touches = ev.targetTouches;
+						if (touches.length > 1) {
+							return;
+						}
+						this.timeOutEvent = setTimeout(function() {
+							this.timeOutEvent = 0;
+							alert("您长按了列表第" + (index + 1) + "行！");
+						}, 2000);
+					},
+					cancelTapHold : function() {
+						// 取消长按
+						clearTimeout(this.timeOutEvent);
+						this.timeOutEvent = 0;
+					},
+					deleteItem : function(index) {
+						// 这里编辑删除列表项逻辑
+						this.listDatas.splice(index, 1);
+					},
+					loadTop : function() {
+						// 这里编辑下拉刷新逻辑
+						var self = this;
+						setTimeout(function() {
+							var row = {
+								"type" : "设备巡检",
+								"img" : "../img/org3.png",
+								"lastMsg" : "对小区内电力设备进行巡检",
+								"lastTime" : "3月12日"
+							};
+							self.listDatas.unshift(row);
+							self.$refs.loadmore.onTopLoaded();
+						}, 2000);
+					},
+					loadBottom : function() {
+						// 这里编辑上拉加载逻辑
+						var self = this;
+						setTimeout(function() {
+							var row = {
+								"type" : "设备巡检",
+								"img" : "../img/org3.png",
+								"lastMsg" : "对小区内电力设备进行巡检",
+								"lastTime" : "3月12日"
+							};
+							self.listDatas.push(row);
+							self.$refs.loadmore.onBottomLoaded();
+						}, 2000);
+					}
+				}
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,461 @@
+
+//获取传参
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null)
+		return unescape(r[2]);
+	return null;
+}
+//提交
+function conditionSUB(){
+	var state = getQueryString("state");//巡检类型
+	if("0"==state){//设备
+		facilitySUB();
+	}
+	if("1"==state){//空关
+		houseReportSUB();
+	}
+	if("2"==state){//装修
+		decorationReg();
+	}
+	if("3"==state){//园区
+		inspectionManaReport();
+	}
+}
+
+//设备提交
+function facilitySUB(){
+	var PICTURE = getRandomNumber();
+	//获取页面参数
+	var id = getQueryString("id");//主表id
+	var frequency = getQueryString("frequency");//巡检次数
+	var facilityId = getQueryString("facilityId");//设备id
+	var endNum = getQueryString("endNum");//完成次数
+	/*var IS_FINISH = '0';
+	if(frequency-endNum<=0){
+		IS_FINISH = '1';
+	}*/
+	summer.ajax({
+		type : 'post',
+		url : summer.getAppStorage('url') +'/pollingDetails/facilitySave',
+		param : {
+			"token":summer.getAppStorage("tokenEntity").token,
+			"PERSON_NAME" : summer.getAppStorage("userName"),//巡检人姓名
+			"PERSON_ID" : summer.getAppStorage("userId"),//巡检人id
+			"REPORT_DATE" : $("#time").val(),//上报时间
+			"IS_NORMAL" : $("#normal").val(),  //是否正常
+			"remark" : $("#remark").val(),//备注
+			"tenantId" : summer.getAppStorage("tenantId"),//租户id
+			"PRG_INSPECTION_ALL_ID" : id,//主表id
+			"INSPECTION_ID" : facilityId,//设备id
+			"PICTURE" : PICTURE,//图片
+			//"IS_FINISH" : IS_FINISH ,//是否完成
+			"INSPECTION_NUM":frequency,//巡检次数
+			"SURPLUS_NUM" :endNum//完成次数
+		},
+		header : {
+			//Authorization : "OAuth2: token",
+			//"Content-Type" : "application/json"
+			Authorization : "OAuth2: token"
+		}
+	}, function(response) {
+		response.data = JSON.parse(response.data);
+		var code = response.data.code;
+		if(code == "200"){
+			UM.toast({
+			  	  text: "保存成功"
+				});
+					var t = (new Date()).valueOf();
+			summer.openWin({
+				"id":"engineering_management"+t,
+		        "url" : "html/engineering_management.html"
+   				 });
+   				//summer.closeWin({});
+   				
+		}else{
+			UM.toast({
+			  	  text: response.data.state
+				});
+		}
+	});
+	//imagePaths为数组
+	for ( i = 0; i < imgPathes.length; i++) {
+		var imgPathWS = imgPathes[i].imgPath;
+		//多文件上传，5秒超时
+		summer.multiUpload({
+			fileArray : [{//文件列表，数组
+				fileURL : imgPathWS, //需要上传的文件路径
+				type : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
+				name : "imgs" //后台取图片的Key
+			}],
+			params : {
+				token : summer.getAppStorage("tokenEntity").token,
+				batchno : PICTURE //随机数
+			}, //上传参数
+			//headers : {},
+			SERVER : "http://106.74.146.162:9080/document/uploadfile/uploadfilestoapp", //服务器地址
+			timeout : 5
+		}, "multiUploadCallback(args)", "multiUploadErrCallback(args)");
+	}
+}
+
+//空关提交
+function houseReportSUB(){
+	var PICTURE = getRandomNumber();
+	//获取页面参数
+	var id = getQueryString("id");//主表id
+	var frequency = getQueryString("frequency");//巡检次数
+	var houseReport = getQueryString("houseReportId");//空关id
+	var houseEndNum = getQueryString("houseEndNum");//完成次数
+	/*var IS_FINISH = '0';
+	if(frequency-endNum<=0){
+		IS_FINISH = '1';
+	}*/
+	summer.ajax({
+		type : 'post',
+		url : summer.getAppStorage('url') +'/pollingDetails/houseReportSave',
+		param : {
+			"token":summer.getAppStorage("tokenEntity").token,
+			"PERSON_NAME" : summer.getAppStorage("userName"),//巡检人姓名
+			"PERSON_ID" : summer.getAppStorage("userId"),//巡检人id
+			"REPORT_DATE" : $("#time").val(),//上报时间
+			"IS_NORMAL" : $("#normal").val(),  //是否正常
+			"remark" : $("#remark").val(),//备注
+			"tenantId" : summer.getAppStorage("tenantId"),//租户id
+			"PRG_INSPECTION_ALL_ID" : id,//主表id
+			"PICTURE" : PICTURE,//图片
+			//"IS_FINISH" : IS_FINISH ,//是否完成
+			"INSPECTION_NUM":frequency,//巡检次数
+			"SURPLUS_NUM" :houseEndNum,//完成次数
+			"INSPECTION_ID" : houseReport//空关id
+		},
+		header : {
+			//Authorization : "OAuth2: token",
+			//"Content-Type" : "application/json"
+			Authorization : "OAuth2: token"
+		}
+	}, function(response) {
+		response.data = JSON.parse(response.data);
+		var code = response.data.code;
+		if(code == "200"){
+			UM.toast({
+			  	  text: "保存成功"
+				});
+				var t = (new Date()).valueOf();
+			summer.openWin({
+				"id":"engineering_management"+t,
+		        "url" : "html/engineering_management.html"
+   				 });
+		}else{
+			UM.toast({
+			  	  text: response.data.state
+				});
+		}
+	});
+	//imagePaths为数组
+	for ( i = 0; i < imgPathes.length; i++) {
+		var imgPathWS = imgPathes[i].imgPath;
+		//多文件上传，5秒超时
+		summer.multiUpload({
+			fileArray : [{//文件列表，数组
+				fileURL : imgPathWS, //需要上传的文件路径
+				type : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
+				name : "imgs" //后台取图片的Key
+			}],
+			params : {
+				token : summer.getAppStorage("tokenEntity").token,
+				batchno : PICTURE //随机数
+			}, //上传参数
+			//headers : {},
+			SERVER : "http://106.74.146.162:9080/document/uploadfile/uploadfilestoapp", //服务器地址
+			timeout : 5
+		}, "multiUploadCallback(args)", "multiUploadErrCallback(args)");
+	}
+}
+
+//装修提交
+function decorationReg(){
+	var PICTURE = getRandomNumber();
+	//获取页面参数
+	var id = getQueryString("id");//主表id
+	var frequency = getQueryString("frequency");//巡检次数
+	var decorationRegId = getQueryString("decorationRegId");//子表id
+	var decorationEndNum = getQueryString("decorationEndNum");//完成次数
+	/*var IS_FINISH = '0';
+	if(frequency-endNum<=0){
+		IS_FINISH = '1';
+	}*/
+	summer.ajax({
+		type : 'post',
+		url : summer.getAppStorage('url') +'/pollingDetails/decorationRegSave',
+		param : {
+			"token":summer.getAppStorage("tokenEntity").token,
+			"PERSON_NAME" : summer.getAppStorage("userName"),//巡检人姓名
+			"PERSON_ID" : summer.getAppStorage("userId"),//巡检人id
+			"REPORT_DATE" : $("#time").val(),//上报时间
+			"IS_NORMAL" : $("#normal").val(),  //是否正常
+			"remark" : $("#remark").val(),//备注
+			"tenantId" : summer.getAppStorage("tenantId"),//租户id
+			"PRG_INSPECTION_ALL_ID" : id,//主表id
+			"PICTURE" : PICTURE,//图片
+			//"IS_FINISH" : IS_FINISH ,//是否完成
+			"INSPECTION_NUM":frequency,//巡检次数
+			"SURPLUS_NUM" :decorationEndNum,//完成次数
+			"INSPECTION_ID" : decorationRegId//子表id
+		},
+		header : {
+			//Authorization : "OAuth2: token",
+			//"Content-Type" : "application/json"
+			Authorization : "OAuth2: token"
+		}
+	}, function(response) {
+		response.data = JSON.parse(response.data);
+		var code = response.data.code;
+		if(code == "200"){
+			UM.toast({
+			  	  text: "保存成功"
+				});
+				var t = (new Date()).valueOf();
+			summer.openWin({
+				"id":"engineering_management"+t,
+		        "url" : "html/engineering_management.html"
+   				 });
+		}else{
+			UM.toast({
+			  	  text: response.data.state
+				});
+		}
+	});
+	//imagePaths为数组
+	for ( i = 0; i < imgPathes.length; i++) {
+		var imgPathWS = imgPathes[i].imgPath;
+		//多文件上传，5秒超时
+		summer.multiUpload({
+			fileArray : [{//文件列表，数组
+				fileURL : imgPathWS, //需要上传的文件路径
+				type : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
+				name : "imgs" //后台取图片的Key
+			}],
+			params : {
+				token : summer.getAppStorage("tokenEntity").token,
+				batchno : PICTURE //随机数
+			}, //上传参数
+			//headers : {},
+			SERVER : "http://106.74.146.162:9080/document/uploadfile/uploadfilestoapp", //服务器地址
+			timeout : 5
+		}, "multiUploadCallback(args)", "multiUploadErrCallback(args)");
+	}
+}
+
+//园区提交
+function inspectionManaReport(){
+	var PICTURE = getRandomNumber();
+	//获取页面参数
+	var id = getQueryString("id");//主表id
+	var frequency = getQueryString("frequency");//巡检次数
+	var inspectionManaID = getQueryString("inspectionManaID");//子表id
+	var inspectionManaEndNum = getQueryString("inspectionManaEndNum");//完成次数
+	/*var IS_FINISH = '0';
+	if(frequency-endNum<=0){
+		IS_FINISH = '1';
+	}*/
+	summer.ajax({
+		type : 'post',
+		url : summer.getAppStorage('url') +'/pollingDetails/inspectionManaReportSave',
+		param : {
+			"token":summer.getAppStorage("tokenEntity").token,
+			"PERSON_NAME" : summer.getAppStorage("userName"),//巡检人姓名
+			"PERSON_ID" : summer.getAppStorage("userId"),//巡检人id
+			"REPORT_DATE" : $("#time").val(),//上报时间
+			"IS_NORMAL" : $("#normal").val(),  //是否正常
+			"remark" : $("#remark").val(),//备注
+			"tenantId" : summer.getAppStorage("tenantId"),//租户id
+			"PRG_INSPECTION_ALL_ID" : id,//主表id
+			"PICTURE" : PICTURE,//图片
+			//"IS_FINISH" : IS_FINISH ,//是否完成
+			"INSPECTION_NUM":frequency,//巡检次数
+			"SURPLUS_NUM" :inspectionManaEndNum,//完成次数
+			"INSPECTION_ID" : inspectionManaID//子表id
+		},
+		header : {
+			//Authorization : "OAuth2: token",
+			//"Content-Type" : "application/json"
+			Authorization : "OAuth2: token"
+		}
+	}, function(response) {
+		response.data = JSON.parse(response.data);
+		var code = response.data.code;
+		if(code == "200"){
+			UM.toast({
+			  	  text: "保存成功"
+				});
+				var t = (new Date()).valueOf();
+			summer.openWin({
+				"id" :"engineering_management"+t,
+		        "url" : "html/engineering_management.html"
+   				 });
+		}else{
+			UM.toast({
+			  	  text: response.data.state
+				});
+		}
+	});
+	//imagePaths为数组
+	for ( i = 0; i < imgPathes.length; i++) {
+		var imgPathWS = imgPathes[i].imgPath;
+		//多文件上传，5秒超时
+		summer.multiUpload({
+			fileArray : [{//文件列表，数组
+				fileURL : imgPathWS, //需要上传的文件路径
+				type : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
+				name : "imgs" //后台取图片的Key
+			}],
+			params : {
+				token : summer.getAppStorage("tokenEntity").token,
+				batchno : PICTURE //随机数
+			}, //上传参数
+			//headers : {},
+			SERVER : "http://106.74.146.162:9080/document/uploadfile/uploadfilestoapp", //服务器地址
+			timeout : 5
+		}, "multiUploadCallback(args)", "multiUploadErrCallback(args)");
+	}
+}
+
+
+function fanhui(){
+	summer.closeWin({});
+}
+
+summerready = function() {
+	$("#name").val(summer.getAppStorage("userName"));
+	$("#name").attr("readonly", "readonly");
+	$("#time").val(getDate());
+	$("#time").attr("readonly", "readonly");
+}
+
+function getDate(){
+	 var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+}
+
+//生成随机数DOC+15位 7 8
+function getRandomNumber(){
+	 var currentdate='DOC';
+	var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        date = year + month + strDate;
+        //八位随机数
+        var finalNum = '';
+		for(var i = 0 ; i< 8 ; i++){
+		    finalNum += Math.floor(Math.random()*10);
+		}
+        
+        return currentdate+=date+finalNum;
+
+}
+
+//选择图片权限授予
+function openPhotoAlbum() {
+	var params = ["android.permission.READ_EXTERNAL_STORAGE"];
+	commonFunc(params, openPhotoAlbum_common);
+}
+
+//选择图片权限授予
+function commonFunc(params, common) {
+	if ($summer.os == "android") {
+		summer.getPermission(params, function(response) {//成功回调
+			common();
+		}, function(response) {//失败回调
+			//alert(response);
+		});
+	} else {
+		common();
+	}
+}
+
+var imgPathes;
+//打开系统相册，选择多张图片
+var openPhotoAlbum_common = function() {
+	summer.openPhotoAlbum({
+		type : "multiple", //支持选多张图片
+		maxCount : 9,
+		callback : function(args) {
+			imgPathes = args.imgPaths;
+			var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+			    $gallery = $("#gallery"),
+			    $galleryImg = $("#galleryImg"),
+			    $uploaderInput = $("#uploaderInput"),
+			    $uploaderFiles = $("#uploaderFiles");
+			for ( i = 0; i < args.imgPaths.length; i++) {
+				var imgPathWS = args.imgPaths[i].imgPath;
+				$uploaderFiles.append($(tmpl.replace('#url#', imgPathWS)));
+			}
+			var index;
+			//点击图片
+			$uploaderFiles.on("click", "li", function() {
+				index = $(this).index();
+				$galleryImg.attr("style", this.getAttribute("style"));
+				$gallery.fadeIn(100);
+			});
+			$gallery.on("click", function() {
+				$gallery.fadeOut(100);
+			});
+			//删除图片
+			$(".weui-gallery__del").click(function() {
+				//delet(RaNum)
+				$uploaderFiles.find("li").eq(index).remove();
+			});
+		}
+	});
+}
+function multiUploadCallback(args) {
+	//$summer.alert(args);
+	//$summer.alert("multiUpload,成功回调:" + JSON.stringify(args));
+}
+
+function multiUploadErrCallback(args) {
+	//$summer.alert(args);
+	//$summer.alert("multiUpload,失败回调:" + args.error);
+}
+
+/*function delet(RaNum) {
+	summer.ajax({
+		"header" : {
+			"Content-Type" : "application/json"
+		},
+		"type" : "POST",
+		"url" : "http://106.74.146.162:9080/document/uploadfile/deleteuploadimage",
+		"async" : "false",
+		"param" : {
+			token : summer.getAppStorage("tokenEntity").token,
+			key : '201905146000000258'
+		},
+	}, function(response) {//成功回调
+		summer.toast({
+			"msg" : "删除成功!"
+		})
+	}, function(response) {//失败回调
+		//alert("请联系管理员！");
+	});
+}*/

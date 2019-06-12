@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/font-icons.css">
+        <link rel="stylesheet" type="text/css" href="../css/iuapmobile.um.listview.css">
+        
+		<script src="../js/reset.js"></script>
+		<script src="../js/summer.js" ></script>		
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../js/meterredHistory.js" ></script>
+        <script type="text/javascript" src="../js/knockout.js"></script>
+        <script type="text/javascript" src="../js/Frameworks/iuapmobile.frameworks.listview.js"></script>
+	</head>
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header">
+				<a onclick="fanhui()" class="um-back"></a>	
+				<h3>抄表记录</h3>
+				<a class="meterread-histroy" onclick="goMeterredhistory()">新增抄表记录</a>
+			</div>
+
+			 <div class="um-content">
+				 
+				 <button class="lease-searchbtn2" onclick="Getchaxun()" >筛选</button>
+					<div class="um-screenbox" id="chaxun" style="margin-top:0.3rem;margin-bottom:0.3rem;padding: 0 0.3rem;overflow: hidden;">
+						
+					</div>
+			
+			                <div class="um-listview-wrap" id="listview">
+			                    
+			                    <ul class="um-list um-no-active" id="recordID">
+											
+						</ul>    
+			                    
+			                </div>
+			
+			</div> 
+
+		</div>
+
+	</body>
+</html>

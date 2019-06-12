@@ -1,0 +1,13 @@
+.main-item {
+    margin-left: 10px;
+}
+.um-list .um-list-item.main-item:before {
+    width: 0;
+    height: 0;
+    border: 0;
+}
+
+.um-input-text {
+    border: none;
+}
+

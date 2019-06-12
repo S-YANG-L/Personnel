@@ -1,0 +1,26 @@
+#select1_dummy{
+	border:none;
+	padding-left:10px;
+	color:#555;
+	font-size:17px;
+}
+
+#select1_dummy:disabled{
+	background:#fff;
+}
+
+#main>div{
+	display:block;
+}
+
+.btn-sm{
+	margin-top:10px;
+}
+
+.um-no-brs{
+	margin-top:70px;
+}
+
+.um-input-text{
+    margin-top:5px;
+}

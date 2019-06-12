@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/evaluation.css">
+		<script src="../js/summer.js" ></script>		
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../js/evaluation.js" ></script>
+	</head>
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header" >
+				<h3>服务评价</h3>
+				<a href="result_feedback.html" class="um-back"></a>
+				<a class="um-header-right" href="result_feedback.html">保存</a>
+
+			</div>
+
+			<div class="um-content">
+				<ul class="um-list" style="margin:30px 0px">
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									工作名称
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" placeholder="卫生清洁" disabled="">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									工作内容
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" placeholder="负责小区内部停车场内卫生" disabled="">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									地点
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" placeholder="地下停车场" disabled="">
+								</div>
+							</div>
+						</div>
+					</li>
+					
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									完成人
+								</div>
+								<div class="um-list-item-right">
+									<input type="text" class="form-control" placeholder="王五" disabled="">
+								</div>
+							</div>
+						</div>
+					</li>
+				    
+					<li>
+						<div class="um-list-item">
+							<div class="um-list-item-inner">
+								<div class="um-list-item-left">
+									完成时间
+								</div>
+								<div class="um-list-item-right">
+									<input type="datetime" class="form-control" placeholder="2019年3月12日" disabled="">
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+			
+				
+                <div class="mt15">
+                    <p>您对工作人员的服务态度满意吗（分数越高代表您的满意度越高）</p>
+                	<form>
+                		<div class="tc"><output for="range" name="x">5</output></div>
+                		<input type="range" oninput="x.value=parseInt(range.value)" name="range" value=5 min="0" max="10" step="0.1">
+                	</form>	
+                	<p>您对工作人员的服务过程满意吗（分数越高代表您的满意度越高）</p>
+                	<form>
+                		<div class="tc"><output for="range" name="x">5</output></div>
+                		<input type="range" oninput="x.value=parseInt(range.value)" name="range" value=5 min="0" max="10" step="0.1">
+                	</form>	
+                	<p>您对工作人员的完成结果满意吗（分数越高代表您的满意度越高）</p>
+                	<form>
+                		<div class="tc"><output for="range" name="x">5</output></div>
+                		<input type="range" oninput="x.value=parseInt(range.value)" name="range" value=5 min="0" max="10" step="0.1">
+                	</form>	
+                </div>
+
+			</div>
+
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/chaobiao_info.css">
+		<script src="../js/summer.js" ></script>		
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../js/chaobiao_info.js" ></script>
+	</head>
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header" >
+				<h3>抄表详情</h3>
+				<a href="engineering_management.html" class="um-back">返回</a>
+			</div>
+
+			<div class="um-content">
+				
+                <ul class="um-list">
+                	<li class="um-list-item">
+                		<div class="um-list-item-inner">
+                			<div class="um-list-item-left pl15">
+                				抄表单类型
+                			</div>
+                			<div class="um-list-item-right">
+                				<input type="text" class="form-control tr" placeholder="电费表单" disabled="">
+                			</div>
+                		</div>
+                	</li>
+                	<li class="um-list-item">
+                		<div class="um-list-item-inner">
+                			<div class="um-list-item-left pl15">
+                				仪表类型
+                			</div>
+                			<div class="um-list-item-right">
+                				<input type="password" class="form-control tr" placeholder="电表" disabled="">
+                			</div>
+                		</div>
+                	</li>
+                	<li class="um-list-item">
+                		<div class="um-list-item-inner">
+                			<div class="um-list-item-left pl15">
+                				抄表日期
+                			</div>
+                			<div class="um-list-item-right">
+                				<input type="datetime" class="form-control tr" placeholder="2019-3月1日" disabled="">
+                			</div>
+                		</div>
+                	</li>
+                	<li class="um-list-item">
+                		<div class="um-list-item-inner">
+                			<div class="um-list-item-left pl15">
+                				上月度数
+                			</div>
+                			<div class="um-list-item-right">
+                				<input type="number" class="form-control tr" placeholder="22147" disabled="">
+                			</div>
+                		</div>
+                	</li>
+                	<li class="um-list-item">
+                		<div class="um-list-item-inner">
+                			<div class="um-list-item-left pl15">
+                				本月度数
+                			</div>
+                			<div class="um-list-item-right">
+                				<input type="number" class="form-control tr" placeholder="22317" disabled="">
+                			</div>
+                		</div>
+                	</li>
+                	<li class="um-list-item">
+                		<div class="um-list-item-inner">
+                			<div class="um-list-item-left pl15">
+                				实用度数
+                			</div>
+                			<div class="um-list-item-right">
+                				<input type="number" class="form-control tr" placeholder="170" disabled="">
+                			</div>
+                		</div>
+                	</li>
+                </ul>
+
+			</div>
+
+			<div class="um-footer">
+				
+			</div>
+		</div>
+	</body>
+</html>

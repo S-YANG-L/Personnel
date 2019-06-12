@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="um-win">
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/situation_report.css">
+		<script src="../js/reset.js"></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/addMeterReading.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+	</head>
+
+	<body>
+		<div class="um-win" id="index">
+			<div id="header" class="um-header">
+				<a onclick="fanhui()" class="um-back"></a>
+				<h3>新增抄表</h3>
+				<!-- <a class="meterread-histroy" onclick="goMeterredhistory()">抄表记录</a> -->
+			</div>
+			<div class="um-content">
+				<div class="lease-input">
+					<span>抄表单编号</span>
+					<input type="text" id="READING_NUM" class="um-input-new" value="" disabled="disabled">
+				</div>
+					<!-- 仪表信息id -->
+					<input type="hidden" id="InfoId" class="um-input-new" value="">
+				<div class="lease-input">
+					<span>抄表日期</span>
+					<input type="text" id="READING_DATE" class="um-input-new" value="" disabled="disabled">
+				</div>
+				<div class="lease-input">
+					<span>抄表单类型</span>
+					<select id="READING_TYPE" class="um-input-new" style="background:#fff;">
+						<option selected="selected">请选择类型</option>
+						<option value="0">标准</option>
+						<option value="1">初始</option>
+					</select>
+				</div>
+				<div class="lease-input">
+					<span>仪表类型</span>
+					<select id="INSTRUMENT_TYPE" class="um-input-new" style="background:#fff;" onchange="getOddDetail()">
+						<option selected="selected">请选择类型</option>
+						<option value="1">电</option>
+						<option value="0">水</option>
+						<option value="3">供热</option>
+						<option value="2">燃气</option>
+					</select>
+				</div>
+				<div class="lease-input">
+					<span>是否开账</span>
+					<select id="IS_OPEN_ACCOUNT" class="um-input-new" style="background:#fff;">
+						<option selected="selected">请选择类型</option>
+						<option value="1">否</option>
+						<option value="0">是</option>
+					</select>
+				</div>
+				<div class="lease-input">
+					<span>缴费截止日</span>
+					<input type="date" id="OPEN_ACCOUNT_DATE" class="um-input-new" value="" placeholder="请选择截止日期" onblur="compareDate()" style="background:#fff;">
+				</div>
+				
+				<div class="lease-input">
+					<span>仪表名称</span>
+					<!-- <select id="INSTRUMENT_NAME" class="um-input-new" style="background:#fff;">
+						<option selected="selected">请选泽</option>
+					</select> -->
+					<input type="text" id="INSTRUMENT_NAME" class="um-input-new" value="" disabled="disabled">
+				</div>
+				<div class="lease-input">
+					<span>仪表编号</span>
+					<input type="text" id="INSTRUMENT_NUMBER" class="um-input-new" value="" disabled="disabled">
+				</div>
+				<div class="lease-input">
+					<span>旧刻度</span>
+					<input type="text" id="OLD_SCALE" class="um-input-new" value="" disabled="disabled">
+				</div>
+				<div class="lease-input">
+					<span>新刻度</span>
+					<input type="text" id="SCALE" class="um-input-new" value="" onblur="getRests()">
+				</div>
+				<div class="lease-input">
+					<span>刻度差</span>
+					<input type="text" id="SCALE_DIFFERENCE" class="um-input-new" value="" disabled="disabled">
+				</div>
+				<div class="lease-input">
+					<span>单价(元)</span>
+					<input type="text" id="UNIT_PRICE" class="um-input-new" value="" disabled="disabled">
+				</div>
+				<div class="lease-input">
+					<span>总价(元)</span>
+					<input type="text" id="TOTAL_PRICE" class="um-input-new" value=""disabled="disabled">
+				</div>
+				
+				<div style="text-align: center;margin-top: 2rem;">
+					<button id="openDoor" class="bluebutton" type="submit" onclick="submitAll()">
+						提交
+					</button>
+				</div>
+				
+							</div> 
+
+		</div>
+		</div>
+		<script>
+			
+			$(function() {
+				$('.whether-btn a').click(function() {
+					$(this).siblings().removeClass('whether-active');
+					$(this).addClass('whether-active');
+				});
+
+			});
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null)
+					return unescape(r[2]);
+				return null;
+			}
+
+			function goMeterredhistory() {
+				//var roomId = getQueryString("roomId");
+				summer.openWin({
+					"url" : "html/meterredHistory.html"
+				});
+			}
+		</script>
+
+		<script type="text/javascript" class="uploader js_show">
+			$(function() {
+				var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+				    $gallery = $("#gallery"),
+				    $galleryImg = $("#galleryImg"),
+				    $uploaderInput = $("#uploaderInput"),
+				    $uploaderFiles = $("#uploaderFiles");
+
+				$uploaderInput.on("change", function(e) {
+					var src,
+					    url = window.URL || window.webkitURL || window.mozURL,
+					    files = e.target.files;
+					for (var i = 0,
+					    len = files.length; i < len; ++i) {
+						var file = files[i];
+
+						if (url) {
+							src = url.createObjectURL(file);
+						} else {
+							src = e.target.result;
+						}
+
+						$uploaderFiles.append($(tmpl.replace('#url#', src)));
+					}
+				});
+				$uploaderFiles.on("click", "li", function() {
+					$galleryImg.attr("style", this.getAttribute("style"));
+					$gallery.fadeIn(100);
+				});
+				$gallery.on("click", function() {
+					$gallery.fadeOut(100);
+				});
+			});
+		</script>
+
+	</body>
+</html>

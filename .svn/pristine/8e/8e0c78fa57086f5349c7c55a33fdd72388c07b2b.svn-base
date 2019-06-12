@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="um-win">
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+        <link rel="stylesheet" href="../css/situation_report.css">
+        <link rel="stylesheet" href="../css/iscroll.css" />
+        <link rel="stylesheet" href="../css/weui.min.css" />
+        <script src="../js/reset.js"></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/jquery.min.js" ></script>	 
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../js/iscroll.js"></script>
+		<script src="../js/situation_report.js"></script>
+		<script src="../js/jquery-weui.js" ></script>
+		<style>
+        .um-time{
+            background:#ffffff;
+            border-top:1px solid #dddddd;
+            border-bottom:1px solid #dddddd;
+        }
+        .um-time-list{
+            height:46px;
+            line-height: 46px;
+        }
+        .um-time-list:first-child{
+            border-bottom:1px solid #dddddd;
+        }
+        .um-time-txt{
+            float: left;
+            color:#8c8d8e;
+        }
+        .um-time-list .fr{
+            position:relative;
+            float: right;
+            margin-right:30px;
+        }
+        .um-time-list .fr:after{
+            content: "";
+            position:absolute;
+            right:-15px;
+            top:15px;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-right: 2px solid #8c8d8e;
+            border-top: 2px solid #8c8d8e;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .um-time-list input{
+            display:block;
+            width: 180px;
+            height: 45px;
+            line-height:45px;
+            border: none;
+            outline: none;
+            text-align: right;
+            background: #fff;
+        }
+        </style>
+	</head>
+	
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header">
+				<a id="fanhui" onclick="fanhui(this)" class="um-back"></a>
+				<h3>情况上报</h3>		 
+			</div>
+
+			<div class="um-content">
+
+				
+				<div class="door-input">
+					
+					<div class="lease-input">
+						<span>姓名</span>
+						<input type="text" id="name" class="um-input-new" placeholder="请填写您的姓名">
+					</div>
+					
+
+					<div class="lease-input">
+						<span>时间</span>
+						<!-- <div class="fr" class="inputnone scroller-date"> -->
+                            <input type="text" id="time" class="um-input-new" value="">
+                        <!-- </div> -->                            
+					</div>	
+					
+					<div class="lease-input">
+						<span>是否正常</span>
+						<div class="whether-btn">
+							<select id="normal" class="inputnowidth" style="background:#fff;">
+                    		<option value='0'>是</option>
+                    		<option value='1'>否</option>
+                    	</select>
+						</div>
+					</div>	
+
+					<div class="lease-text">
+						<span>备注</span>                       
+                         <textarea name="" id="remark" class="form-control lease-msgtext" placeholder="请填写设备巡检状况"></textarea>                                                                
+					</div>
+					<div class="lease-text">
+						<span>拍照上传</span>                       
+                        <div class="page__bd">
+					        <div class="weui-gallery" id="gallery">
+					            <span class="weui-gallery__img" id="galleryImg"></span>
+					            <div class="weui-gallery__opr">
+					                <a href="javascript:" class="weui-gallery__del">
+					                    <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+					                </a>
+					            </div>
+					        </div>					
+					        <div class="weui-cell__bd">
+					            <div class="weui-uploader">									
+					                <div class="weui-uploader__bd">
+					                    <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+					                    <div class="weui-uploader__input-box">
+					                    	<input id="uploaderInput" class="weui-uploader__input" accept="image/*" multiple="" value="" onclick="openPhotoAlbum()">
+					                	</div>
+					                </div>
+					            </div>
+					        </div>										
+					    </div>                                                                					
+					</div>
+				
+				</div>
+
+
+				<div style="text-align: center;margin-top: 1.5rem;">
+					<button class="bluebutton" type="submit" onclick="conditionSUB()">提交</button>
+				</div>
+				
+			</div>
+
+
+
+			</div>
+		</div>
+		<script>
+			$(function () {
+        		$('.scroller-date').scroller('destroy').scroller({
+        			preset: 'date',
+        			theme: "ios7",
+        			mode: "scroller",
+        			display: "bottom",
+        			animate: ""
+        		});	
+        		 $('.whether-btn a').click(function(){
+		            $(this).siblings().removeClass('whether-active');
+		            $(this).addClass('whether-active');
+		
+		        })
+        	});			
+		</script>
+		
+	<script type="text/javascript" class="uploader js_show">
+    $(function(){
+        var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+            $gallery = $("#gallery"), $galleryImg = $("#galleryImg"),
+            $uploaderInput = $("#uploaderInput"),
+            $uploaderFiles = $("#uploaderFiles")
+            ;
+ 
+        $uploaderInput.on("change", function(e){
+            var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+ 
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+ 
+                $uploaderFiles.append($(tmpl.replace('#url#', src)));
+            }
+        });
+        $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+    });
+ </script>
+		
+		
+	</body>
+</html>

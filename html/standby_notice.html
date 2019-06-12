@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/weui.min.css" />
+		<style>
+			div.Artical > div {
+				display: none;
+				color: #555;
+			}
+			div.Artical > div.active {
+				display: block;
+			}
+
+		</style>
+
+		<script src="../js/reset.js"></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+		<script src="../js/standby_notice.js" ></script>
+	</head>
+	<body>
+		<div class="um-win" id="index">
+			<div class="um-header" >
+				<h3>待办通知</h3>
+				<a onclick="fanhui()" class="um-back"></a>
+			</div>
+
+			<div class="um-content" style="margin-top:0;">
+
+				<ul class="um-tabbar um-tabbar-underline2 pt10 pb10 um-tabbar-switch" style="background: #fff;">
+					<li class="active" data-tar='.to-do'>
+						<a onclick="backlog()">待办事项</a><span></span>
+					</li>
+					<li data-tar='.done'>
+						<a onclick="haveFinished()">已办事项</a><span></span>
+					</li>
+					<li data-tar='.refuse'>
+						<a onclick="refusing()">拒绝事项</a><span></span>
+					</li>
+				</ul>
+
+				<div class="Artical">
+
+					<!-- 待办	 -->
+					<div class="to-do active " style="overflow: hidden;">
+						<div style="background:#fff;padding:0.3rem;overflow: hidden;">
+							<input type="search" class="lease-search" placeholder="请输入工单名称" id="commission" >
+							<button class="lease-searchbtn" onclick="obscure()">
+								搜索
+							</button>
+						</div>
+
+						<ul class="um-list" id="orderCommission">
+	
+						</ul>
+					</div>
+
+					<!-- 已办
+					<div class="done">
+
+					<ul class="um-list">
+
+					<li>
+					<a href="#" class="btn"  onclick="standby_notice_info()">
+					<div class="center-icon">
+					<img alt="" src="../img/work-complaint-icon.png">
+					</div>
+
+					<div class="um-media-body">
+					<h4 class="um-media-heading um-mobilebt32">消息</h4>
+					<p class="um-mobilebthui">缴费日期:2019年03月15日</p>
+					</div>
+					</a>
+					</li>
+					<li >
+					<a href="#" class="btn" onclick="standby_notice_info()">
+					<div class="center-icon">
+					<img alt="" src="../img/work-repair-icon.png">
+					</div>
+
+					<div class="um-media-body">
+					<h4 class="um-media-heading um-mobilebt32">服务通知</h4>
+					<p class="um-mobilebthui">缴费日期:2019年03月15日</p>
+					</div>
+					</a>
+					</li>
+
+					</ul>
+
+					</div>-->
+
+					<!-- 拒绝
+					<div class="refuse">
+					<ul class="um-list">
+
+					<li >
+					<a href="#" class="btn" onclick="standby_notice_info()">
+					<div class="center-icon">
+					<img alt="" src="../img/work-repair-icon.png">
+					</div>
+
+					<div class="um-media-body">
+					<h4 class="um-media-heading um-mobilebt32">服务通知</h4>
+					<p class="um-mobilebthui">缴费日期:2019年03月15日</p>
+					</div>
+					</a>
+					</li>
+					<li>
+					<a href="#" class="btn"  onclick="standby_notice_info()">
+					<div class="center-icon">
+					<img alt="" src="../img/work-complaint-icon.png">
+					</div>
+
+					<div class="um-media-body">
+					<h4 class="um-media-heading um-mobilebt32">消息</h4>
+					<p class="um-mobilebthui">缴费日期:2019年03月15日</p>
+					</div>
+					</a>
+					</li>
+
+					</ul>
+
+					</div>	-->
+				</div>
+
+			</div>
+
+		</div>
+
+		<script>$(function() {
+				/*导航更换js*/
+				$('ul.um-tabbar-switch  Li').click(function() {
+					$(this).addClass('active').siblings('.active').removeClass('active');
+					var tar = $(this).attr('data-tar');
+					$(tar).addClass('active').siblings('.active').removeClass('active');
+				});
+			});</script>
+	</body>
+</html>

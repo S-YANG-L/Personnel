@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+		<link rel="stylesheet" href="../css/font-icons.css">	
+		<script src="../js/reset.js"></script>
+		<script src="../js/jquery.min.js" ></script>
+		<script src="../js/summer.js" ></script>
+		<script src="../js/check_info.js" ></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+	</head>
+	<body>
+		<div class="um-page" id="index" style="background:#efefef;">
+			<div class="um-header" >
+				<a onclick="fanhui()" class="um-back"></a>
+				<h3>巡检详情</h3>
+			</div>
+			
+			<div class="um-content" id="ListDiv">
+				<!-- <div class="um-noticediv" style="margin-bottom:0.64rem;">
+						<div class="notice-head">
+							<div class="center-icon">
+								<img alt="" src="../img/work-repair-icon.png">
+							</div>
+							<div style="float:left;position: relative;width:10rem;">
+								<h4 class="um-media-heading um-mobilebt32">'+PMM.deviceName+'</h4>
+								<button class="btn btn-info" style="width:4rem;height:1.4rem;padding: 0.2rem !important;">情况上报</button>
+								<p class="um-mobilebthui">'+inspectionStartTime+'</p>
+							</div>
+						</div>
+					</div> -->
+
+			</div>
+		</div>
+
+	</body>
+	<!-- <body>
+		<div class="um-win" id="index">
+			<div class="um-header" >
+				<a href="engineering_management.html" class="um-back"> 返回</a>
+				<h3>巡检详情</h3>
+			</div>
+			<div class="um-content">
+				<div class="um-noticediv">
+					<div class="notice-head">					
+						<div class="center-icon">
+							<img alt="" src="../img/inspect-icon.png">								
+						</div>						
+						<div style="float:left;" >
+							<h4 class="um-media-heading um-mobilebt32" id="inspection"></h4>
+							<p class="um-mobilebthui" id="inspectionEndTime"></p>
+						</div> 						
+					
+					</div>
+					<ul>
+						<li><span >巡检内容</span>		<span id="remark"></span>	</li>
+						<li><span>巡检次数</span>		 <span id="frequency"></span>				</li> 
+						<li><span>剩余次数</span>		 <span id="surplusfrequency"></span>				</li> 
+						<li><span>巡检人员</span> 		<span id="inspectionPerson"></span>				</li>
+						<li><span>巡检开始时间</span>	<span id="inspectionStartTime"></span>				</li>
+						<li><span>巡检结束时间</span>	<span id="inEndTime"></span>				</li>
+							<input  id="ID" type="hidden" value=""/>
+							<input  id="effectStatus" type="hidden" value=""/>
+					</ul>					
+				</div>
+				
+				<div style="text-align: center;margin-top:2rem;">
+					<button id="situation" class="bluebutton" onclick="situation_report()">情况上报</button>
+				</div>
+				
+			</div>
+			 
+		</div>
+		<script>
+			function situation_report(){
+				var id = $("#ID").val();
+				var effectStatus = $("#effectStatus").val();
+				var inspection = $("#inspection").text();
+				if(inspection == "设备巡检"){
+					inspection = 0;
+				}
+				if(inspection == "装修巡检"){
+					inspection = 1;
+				}
+				if(inspection == "空关巡检"){
+					inspection = 2;
+				}
+				if(inspection == "园区巡检"){
+					inspection = 3;
+				}
+				summer.openWin({
+		        //"id" : id,
+		        "url" : "html/situation_report.html?id="+id+"&inspection="+inspection+"&effectStatus="+effectStatus
+	   				 });
+			}
+		</script>
+	</body> -->
+</html>

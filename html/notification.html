@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iuapmobile.um.listview.css">
+
+		<script src="../js/reset.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/summer.js"></script>
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+		<script type="text/javascript" src="../js/knockout.js"></script>
+		<script type="text/javascript" src="../js/Frameworks/iuapmobile.frameworks.listview.js"></script>
+		<script src="../js/notification.js"></script>
+	</head>
+	<body>
+		<div class="um-page" id="index" style="background:#efefef;">
+			<div id="header" class="um-header">
+				<a onclick="fanhui()" class="um-back"></a>
+				<h3>内部通知</h3>
+			</div>
+
+			<div class="um-content" >
+				<div class="um-listview-wrap" id="listview" style="overflow: hidden;">
+
+					<div style="background:#fff;padding:0.3rem;overflow: hidden;">
+						<input type="search" class="lease-search" placeholder="请输入标题" id="headline" >
+						<button class="lease-searchbtn" onclick="headlineLike()">
+							搜索
+						</button>
+					</div>
+
+					<ul class="um-list um-no-active" id="Servicemessage" >
+
+					</ul>
+
+				</div>
+			</div>
+
+		</div>
+		<!-- <div class="um-page" id="newsDetail">
+		<div class="um-header">
+		<a href="#" class="um-back"></a>
+		<h3>公告详情</h3>
+		</div>
+		<div class="um-content p15">
+
+		</div>
+
+		</div> -->
+	</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html class="um-win">
+	<head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/font-icons.css">
+		<link rel="stylesheet" href="../css/iuapmobile.um.css">
+        <link rel="stylesheet" type="text/css" href="../css/islider.css">
+        <link rel="stylesheet" href="../css/iscroll.css" /> 
+        <link rel="stylesheet" href="../css/chaobiao.css">
+		<script src="../js/summer.js" ></script>
+		<script src="../js/jquery.min.js" ></script>	 
+		<script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+        <script type="text/javascript" src="../js/islider.js"></script>    
+        <script src="../js/iscroll.js"></script>
+	</head>
+	
+	<body>
+		<div class="um-page um-win" id="index">
+			<div id="header" class="um-header">
+				<a href="engineering_management.html" class="um-back"></a>
+				<h3>新增抄表</h3>	
+					 
+			</div>
+			              	
+			<div class="application um-bf1">
+				    <div class="um-input-text">
+                    	<span class="um-input-left">抄表单类型</span>
+                    	<div>
+                        	<input type="text"  id="select1_dummy"/>
+                        	<select id='select1'>
+                        		<option>电费表单</option>
+                        		<option>水费表单</option>
+                        		<option>燃气表单</option>
+                        		<option>供热表单</option> 
+                        	</select>
+                    	</div>
+                	</div>
+                	<div class="um-input-text">
+                    	<span class="um-input-left">仪表类型</span>
+                    	<div>
+                        	<input type="text"  id="select2_dummy"/>
+                        	<select id='select2'>
+                        		<option>电表</option>
+                        		<option>水表</option>
+                        		<option>燃气表</option>
+                        		<option>供热表</option> 
+                        	</select>
+                    	</div>
+                	</div>
+                	
+	                <div class="input_type_time">            
+	                       	<span class="um-input-left">抄表日期</span>
+	                       	<div>
+	                       		<input type="datetime-local" name="date" value="2019-03-01T12:12:12" class="form-control">
+	                       	</div>
+	                </div>
+	                
+					<div class="input_type_lastNumber">
+	                    <span class="um-input-left">上月度数</span>
+	                       <div>
+	                       		<input type="text" class="form-control" placeholder="请输入上月度数">
+	                       	</div>
+	                </div>
+	                
+	                <div class="input_type_NowNumber">
+	                    <span class="um-input-left">本月度数</span>
+	                       <div>
+	                       		<input type="text" class="form-control" placeholder="请输入本月度数">
+	                       	</div>
+	                </div>
+                	  
+                	<div class="input_type_NowNumber">
+	                    <span class="um-input-left">实用度数</span>
+	                       <div>
+	                       		<input type="text" class="form-control" placeholder="请输入实用度数">
+	                       	</div>
+	                </div>
+                	   <button class="um-btn um-no-brs" onclick="engineering_management()">提交</button>
+					
+					</div>	
+							
+			</div>
+		</div>
+		<script>
+		  
+	
+		//日期选择
+			$(function () {
+				// var curr = new Date().getFullYear();
+			   var opt = {
+					'date': {
+						preset: 'date'
+					},
+					'select': {
+					   preset: 'select'
+				   }
+				};
+				$('#select1').scroller('destroy').scroller(
+					$.extend(opt['select'], {
+						theme: "ios7",
+						mode: "scroller",
+						display: "bottom",
+						animate: ""
+					})
+				);
+				$('#select2').scroller('destroy').scroller(
+					$.extend(opt['select'], {
+						theme: "ios7",
+						mode: "scroller",
+						display: "bottom",
+						animate: ""
+					})
+				);
+			});
+			function engineering_management(){
+				summer.openWin({
+		        "id" : "engineering_management",
+		        "url" : "html/engineering_management.html"
+	    		});
+			}
+		</script>
+	</body>
+</html>
